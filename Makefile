@@ -1,10 +1,9 @@
-
-
 ### DEV ###
 
 .PHONY: dev
 dev:
-	air -c .air.toml
+	~/go/bin/air -c .air.toml
+	
 
 .PHONY:run
 run:
