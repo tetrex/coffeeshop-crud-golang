@@ -14,7 +14,7 @@ containing
 
 - [] take/give order
     ```json
-    POST order/
+    PUT order/
 
     {
         "order":ORDER,
@@ -25,18 +25,74 @@ containing
         - order data
         - user data
 - [] check order
+    ```
+    GET order/:id
+    ```
     - check order status
 - [] fullfill order
+    ```json
+    PATCH order/fullfill
+
+    {  
+        "product":PRODUCT.id
+    }
+    isBaked:status chenged then 
+    ```
     - barista fullfills a part of order
     - if all product(s) of order are fullfilled
     - order status is changed to `baked`
 - [] complete order
+    ```json
+    PATCH order/complete
+
+    {
+        "order":ORDER.id
+    }
+    ```
     - `baked` order taken by customer changed to `completed`
+- [] add inventory
+    ```json
+    PUT product
+
+    {
+        qty:10,
+        name:asjd,
+        price:53
+    }
+
+    ```
+    - manager adds `product` to inventory
 - [] refreash inventory
+    ```json
+    PATCH product
+
+    {   
+        product_id:id,
+        qty:num
+    }
+    ```
     - manager updated `product` inventory
 - [] add employee
-    - manager add's barista
+    ```json
+    PUT employee
+
+    {
+        role:["role"],
+        name:asjd,
+        email:adsaf@gmail.com
+        password:lkasjdlajsd
+    }
+    ```
+    - manager add's barista or manager
 - [] customer history
+    ```json
+    GET customer/history/:id
+    ```
     - to check customer order history
+    - add pagination
 - [] barista  history
+    ```json
+    GET barista/history/:id
+    ```
     - to check barista order fullfillment history
+    - add pagination
