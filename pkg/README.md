@@ -1,1 +1,3 @@
-### all public pks here
+## no public packages here
+
+- cuz this is a monorepo
