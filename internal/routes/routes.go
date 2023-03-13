@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,5 +18,5 @@ func Initilize(app *fiber.App) {
 func HomeApi(ctx *fiber.Ctx) error {
 
 	// Return response in JSON format
-	return ctx.Status(http.StatusOK).JSON(fiber.Map{"status": http.StatusOK, "data": "some-data"})
+	return ctx.Status(http.StatusOK).JSON(fiber.Map{"status": http.StatusOK, "data": time.Now().UnixMilli()})
 }
