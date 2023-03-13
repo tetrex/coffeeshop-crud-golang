@@ -2,3 +2,19 @@
 
 GET {{host}}/ HTTP/1.1
 content-type: application/json
+
+###
+GET {{host}}/customer/ HTTP/1.1
+content-type: application/json
+
+###
+GET {{host}}/employees/ HTTP/1.1
+content-type: application/json
+
+###
+GET {{host}}/orders/ HTTP/1.1
+content-type: application/json
+
+###
+GET {{host}}/products/ HTTP/1.1
+content-type: application/json
