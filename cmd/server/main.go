@@ -1,7 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"os"
+	"os/signal"
+
+	"github.com/tetrex/coffeeshop-crud-golang/internal/server"
+	"golang.org/x/sync/errgroup"
+)
 
 func main() {
-	fmt.Println("--- main---")
+	app := server.FiberApp()
+
+	var eg errgroup.Group
+	eg.Go(func() error {
+		return app.Listen(":8080")
+	})
+	if err := eg.Wait(); err != nil {
+		log.Fatal(err)
+	}
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	if err := app.Shutdown(); err != nil {
+		log.Fatal(err)
+	}
 }
