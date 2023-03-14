@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 
+	"github.com/tetrex/coffeeshop-crud-golang/internal/db"
 	"github.com/tetrex/coffeeshop-crud-golang/internal/server"
 	"golang.org/x/sync/errgroup"
 )
@@ -12,6 +13,9 @@ import (
 func main() {
 	app := server.FiberApp()
 
+	// db setup
+	db.Initilize()
+	// defer db.Close(db.MongoClient,context.TODO(),context.canc)
 	var eg errgroup.Group
 	eg.Go(func() error {
 		return app.Listen(":8080")
@@ -25,4 +29,5 @@ func main() {
 	if err := app.Shutdown(); err != nil {
 		log.Fatal(err)
 	}
+
 }
