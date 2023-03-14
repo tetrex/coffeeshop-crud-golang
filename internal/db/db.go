@@ -65,16 +65,18 @@ func ping(client *mongo.Client, ctx context.Context) error {
 }
 
 var MongoClient *mongo.Client
+var MongoCancleFunc *context.CancelFunc
 
 func Initilize() {
 
 	// Get Client, Context, CancelFunc and
 	// err from connect method.
-	client, ctx, _, err := connect("mongodb://development:testpassword@localhost:27017")
+	client, ctx, cancel, err := connect("mongodb://development:testpassword@localhost:27017")
 	if err != nil {
 		panic(err)
 	}
 	MongoClient = client
+	MongoCancleFunc = &cancel
 	// Release resource when the main
 	// function is returned.
 	// defer Close(client, ctx, cancel)
