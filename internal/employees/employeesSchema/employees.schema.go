@@ -3,12 +3,21 @@ package employeesschema
 import (
 	"github.com/tetrex/coffeeshop-crud-golang/internal/db"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // ----------------
 // collection
-var EmployeeCollection = *db.MongoDataBase.Collection("employees")
+// var EmployeeCollection = db.MongoDataBase.Collection("employees")
+// var EmployeeCollection *mongo.Collection = db.MongoClient.Database("ecom").Collection("employee")
 
+func EmployeeCollection() *mongo.Collection {
+	var collection *mongo.Collection = db.MongoDataBase.Collection("employees")
+	return collection
+
+}
+
+// var collection *mongo.Collection = client.Database("Ecommerce").Collection(CollectionName)
 // ----------------
 
 type EmployeeRoles string
