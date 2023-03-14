@@ -21,8 +21,8 @@ func Create(dto *dto.Employees) (bool, error) {
 		CreatedAt: primitive.Timestamp{T: uint32(time.Now().Unix())},
 		UpdatedAt: primitive.Timestamp{T: uint32(time.Now().Unix())},
 	}
-
-	result, err := employeesschema.EmployeeCollection.InsertOne(context.TODO(), employeeObj)
+	collection := employeesschema.EmployeeCollection()
+	result, err := collection.InsertOne(context.TODO(), employeeObj)
 	if err != nil {
 		fmt.Println(err)
 		return false, err
