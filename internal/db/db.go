@@ -65,6 +65,7 @@ func ping(client *mongo.Client, ctx context.Context) error {
 }
 
 var MongoClient *mongo.Client
+var MongoDataBase *mongo.Database
 var MongoCancleFunc *context.CancelFunc
 
 func Initilize() {
@@ -76,6 +77,7 @@ func Initilize() {
 		panic(err)
 	}
 	MongoClient = client
+	MongoDataBase = client.Database("coffeeshop-v1")
 	MongoCancleFunc = &cancel
 	// Release resource when the main
 	// function is returned.
