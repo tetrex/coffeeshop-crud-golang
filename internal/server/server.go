@@ -10,6 +10,7 @@ import (
 func FiberApp() *fiber.App {
 	app := fiber.New(fiber.Config{
 		Prefork: false,
+		AppName: "go-coffeshop",
 	})
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*", // comma string format e.g. "localhost, nikschaefer.tech"

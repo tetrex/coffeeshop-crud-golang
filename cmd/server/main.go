@@ -1,33 +1,48 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
+	"sync"
+	"time"
 
 	"github.com/tetrex/coffeeshop-crud-golang/internal/db"
 	"github.com/tetrex/coffeeshop-crud-golang/internal/server"
-	"golang.org/x/sync/errgroup"
 )
 
 func main() {
+	// app setup
+	// with routes and middleware
 	app := server.FiberApp()
 
 	// db setup
 	db.Initilize()
-	// defer db.Close(db.MongoClient,context.TODO(),context.canc)
-	var eg errgroup.Group
-	eg.Go(func() error {
-		return app.Listen(":8080")
-	})
-	if err := eg.Wait(); err != nil {
-		log.Fatal(err)
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+
+	var serverShutdown sync.WaitGroup
+
+	go func() {
+		<-c
+		fmt.Println("Gracefully shutting down...")
+		serverShutdown.Add(1)
+		defer serverShutdown.Done()
+		_ = app.ShutdownWithTimeout(60 * time.Second)
+	}()
+
+	// ...
+
+	if err := app.Listen(":8080"); err != nil {
+		log.Panic(err)
 	}
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt)
-	<-quit
-	if err := app.Shutdown(); err != nil {
-		log.Fatal(err)
-	}
+	serverShutdown.Wait()
+
+	// dp connection close
+	db.Close(db.MongoClient, context.TODO(), *db.MongoCancleFunc)
+	// Your cleanup tasks go here
 
 }
