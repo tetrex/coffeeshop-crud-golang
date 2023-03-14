@@ -7,7 +7,7 @@ import (
 
 // ----------------
 // collection
-var EmployeeCollection = db.MongoDataBase.Collection("employees")
+var EmployeeCollection = *db.MongoDataBase.Collection("employees")
 
 // ----------------
 
@@ -25,6 +25,8 @@ type Employees struct {
 	Name      string              `bson:"name,omitempty"`
 	Email     string              `bson:"email,omitempty"`
 	Password  string              `bson:"password,omitempty"`
+	Deleted   bool                `bson:"bool,omitempty"`
 	CreatedAt primitive.Timestamp `bson:"createdAt,omitempty"`
 	UpdatedAt primitive.Timestamp `bson:"updatedAt,omitempty"`
 }
+type EmployeesSchema Employees
