@@ -30,7 +30,7 @@ const (
 
 type Employees struct {
 	ID        primitive.ObjectID  `bson:"_id,omitempty"`
-	Role      EmployeeRoles       `bson:"role,omitempty"`
+	Role      []string            `bson:"role,omitempty"`
 	Name      string              `bson:"name,omitempty"`
 	Email     string              `bson:"email,omitempty"`
 	Password  string              `bson:"password,omitempty"`
