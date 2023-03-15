@@ -25,8 +25,8 @@ func Initilize(app *fiber.App) {
 	// ------------------------------
 	// employees
 	employeesGrp := v1.Group("/employees")
-	employeesGrp.Get("/", employeescontroller.Test)
-	employeesGrp.Put("/new", employeescontroller.CreateNewEmployee)
+	employeesGrp.Put("/", employeescontroller.CreateNewEmployee)
+	employeesGrp.Get("/:id", employeescontroller.FindEmployee)
 	// ------------------------------
 	// orders
 	orders := v1.Group("/orders")

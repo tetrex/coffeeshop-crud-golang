@@ -34,7 +34,7 @@ type Employees struct {
 	Name      string              `bson:"name,omitempty"`
 	Email     string              `bson:"email,omitempty"`
 	Password  string              `bson:"password,omitempty"`
-	Deleted   bool                `bson:"bool,omitempty"`
+	Deleted   bool                `bson:"deleted,omitempty"`
 	CreatedAt primitive.Timestamp `bson:"createdAt,omitempty"`
 	UpdatedAt primitive.Timestamp `bson:"updatedAt,omitempty"`
 }

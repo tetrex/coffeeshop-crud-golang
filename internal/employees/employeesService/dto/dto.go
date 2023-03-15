@@ -1,6 +1,8 @@
 package dto
 
-import employeesschema "github.com/tetrex/coffeeshop-crud-golang/internal/employees/employeesSchema"
+import (
+	employeesschema "github.com/tetrex/coffeeshop-crud-golang/internal/employees/employeesSchema"
+)
 
 type Employees struct {
 	Role     employeesschema.EmployeeRoles `json:"role" validate:"required"`
@@ -9,3 +11,7 @@ type Employees struct {
 	Password string                        `json:"password" validate:"required"`
 }
 type EmployeesCreateDto Employees
+
+type FindEmployee struct {
+	Id string
+}

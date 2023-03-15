@@ -8,12 +8,6 @@ import (
 	"github.com/tetrex/coffeeshop-crud-golang/internal/employees/employeesService/dto"
 )
 
-func Test(ctx *fiber.Ctx) error {
-
-	// Return response in JSON format
-	return ctx.Status(http.StatusOK).JSON(fiber.Map{"status": http.StatusOK, "data": "employees-controller"})
-}
-
 func CreateNewEmployee(ctx *fiber.Ctx) error {
 
 	// json parsing
@@ -45,5 +39,37 @@ func CreateNewEmployee(ctx *fiber.Ctx) error {
 	return ctx.Status(http.StatusOK).JSON(fiber.Map{
 		"status": http.StatusOK,
 		"data":   "employee-created",
+	})
+}
+
+func FindEmployee(ctx *fiber.Ctx) error {
+	// pram struct
+	param := struct {
+		ID string `params:"id"`
+	}{}
+	// parsing param
+	err := ctx.ParamsParser(&param) // "{"id": 111}"
+	if err != nil {
+		return ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status": http.StatusInternalServerError,
+			"error":  "Invalid param",
+		})
+	}
+	// pass that pram to service
+	// to create employee
+	obj := dto.FindEmployee{
+		Id: param.ID,
+	}
+	result, err, isSucess := employeesservice.Find(&obj)
+	if !isSucess && err != nil {
+		return ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status": http.StatusInternalServerError,
+			"error":  "Invalid param",
+		})
+	}
+
+	return ctx.Status(http.StatusOK).JSON(fiber.Map{
+		"status": http.StatusOK,
+		"data":   result,
 	})
 }
