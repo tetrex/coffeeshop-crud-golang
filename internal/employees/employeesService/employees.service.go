@@ -11,9 +11,8 @@ import (
 )
 
 func Create(dto *dto.Employees) (bool, error) {
-
 	employeeObj := employeesschema.EmployeesSchema{
-		Role:      dto.Role,
+		Role:      []string{string(dto.Role)},
 		Name:      dto.Name,
 		Email:     dto.Email,
 		Password:  dto.Password,
