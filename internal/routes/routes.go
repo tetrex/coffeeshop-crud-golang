@@ -34,7 +34,9 @@ func Initilize(app *fiber.App) {
 	orders.Get("/", orderscontroller.Test)
 	// ------------------------------
 	// products
-	products := v1.Group("/products")
-	products.Get("/", productscontroller.Test)
+	productsGrp := v1.Group("/products")
+	productsGrp.Put("/", productscontroller.CreateNewProduct)
+	productsGrp.Get("/:id", productscontroller.FindProduct)
+	productsGrp.Delete("/:id", productscontroller.DeleteProduct)
 
 }

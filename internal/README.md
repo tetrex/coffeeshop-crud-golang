@@ -16,10 +16,10 @@ containing
     -[x] delete
     -[] history (only for barista)
 - products (CRUD)
-    -[] create
-    -[] find
+    -[x] create
+    -[x] find
     -[] update ( to update as a object )
-    -[] delete        
+    -[x] delete        
 - customers
     -[] create
     -[] find ( find order's by customer )
