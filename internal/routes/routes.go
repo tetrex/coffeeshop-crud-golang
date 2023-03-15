@@ -27,6 +27,7 @@ func Initilize(app *fiber.App) {
 	employeesGrp := v1.Group("/employees")
 	employeesGrp.Put("/", employeescontroller.CreateNewEmployee)
 	employeesGrp.Get("/:id", employeescontroller.FindEmployee)
+	employeesGrp.Delete("/:id", employeescontroller.DeleteEmployee)
 	// ------------------------------
 	// orders
 	orders := v1.Group("/orders")

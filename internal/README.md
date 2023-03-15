@@ -11,9 +11,9 @@ containing
 ### routes needed
 - employees (CRUD)
     -[x] create
-    -[] find
+    -[x] find
     -[] update role(s)
-    -[] delete
+    -[x] delete
     -[] history (only for barista)
 - products (CRUD)
     -[] create

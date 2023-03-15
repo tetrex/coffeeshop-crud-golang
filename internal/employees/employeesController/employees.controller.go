@@ -73,3 +73,35 @@ func FindEmployee(ctx *fiber.Ctx) error {
 		"data":   result,
 	})
 }
+
+func DeleteEmployee(ctx *fiber.Ctx) error {
+	// pram struct
+	param := struct {
+		ID string `params:"id"`
+	}{}
+	// parsing param
+	err := ctx.ParamsParser(&param) // "{"id": 111}"
+	if err != nil {
+		return ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status": http.StatusInternalServerError,
+			"error":  "Invalid param",
+		})
+	}
+	// pass that pram to service
+	// to create employee
+	obj := dto.DeleteEmployee{
+		Id: param.ID,
+	}
+	isSucess, err := employeesservice.Delete(&obj)
+	if !isSucess && err != nil {
+		return ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status": http.StatusInternalServerError,
+			"error":  "Invalid param",
+		})
+	}
+
+	return ctx.Status(http.StatusOK).JSON(fiber.Map{
+		"status": http.StatusOK,
+		"data":   "deleted",
+	})
+}

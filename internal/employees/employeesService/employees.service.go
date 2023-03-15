@@ -50,3 +50,18 @@ func Find(dto *dto.FindEmployee) (bson.M, error, bool) {
 
 	return userObject, err, true
 }
+
+// sucess_status,error
+func Delete(dto *dto.DeleteEmployee) (bool, error) {
+	// convert id to hex id
+	objectId, err := primitive.ObjectIDFromHex(dto.Id)
+	if err != nil {
+		fmt.Println(err)
+		return false, err
+	}
+
+	collection := employeesschema.EmployeeCollection()
+	collection.FindOneAndUpdate(context.TODO(), bson.M{"_id": objectId}, bson.M{"deleted": true})
+
+	return true, err
+}

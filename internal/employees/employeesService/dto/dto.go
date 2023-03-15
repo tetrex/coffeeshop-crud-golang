@@ -15,3 +15,6 @@ type EmployeesCreateDto Employees
 type FindEmployee struct {
 	Id string
 }
+type DeleteEmployee struct {
+	Id string
+}
