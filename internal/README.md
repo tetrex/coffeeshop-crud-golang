@@ -8,6 +8,27 @@ containing
 - [] products
 - [] routes
   - `constains all routes`
+### routes needed
+- employees (CRUD)
+    - create
+    - find
+    - update role(s)
+    - delete
+    - history (only for barista)
+- products (CRUD)
+    - create
+    - find
+    - update ( to update as a object )
+    - delete        
+- customers
+    - create
+    - find ( find order's by customer )
+    - history ( order history )
+- orders
+    - create ( create order )
+    - update ( update order )
+    - find ( find order by customer )
+
 
 
 ## routes
